@@ -1,0 +1,55 @@
+Version 0.1, 2013, Daniel Dueñas Domingo (mail:dduenasd@gmail.com)
+
+Description:
+check_ups_snmp.sh is a Nagios plugin to check by snmp a sai status with CS121 adapter.
+With performance data
+
+Use:
+./check_ups_snmp.sh -H <ip_address> -p <option>
+
+Example:
+./check_ups_snmp.sh -H 10.40.80.1 -p battery_temp -w 25 -c 40
+
+OPTIONS:
+-H|--hostname)
+   Sets the hostname. Default is: localhost
+-C|--community)
+   Sets the snmp read community ('public' by default)
+-p|--parameter)
+   Sets the parameter you want monitorize (see available parameters below)
+-h|--help)
+   Show help
+-c|--critical
+   critical value
+-w|--warning
+   warning value
+-d|--dir
+   mibs files directory ('./mibs' by default)
+PARAMETERS:
+ups_alarm:The present number of active alarm conditions. If number is zero, status is OK, if > 0 the status is CRITICAL
+          If an alarm is present, the plugin show the upsAlarmDescr and upsAlarmTime, if you want show the text description of
+          the oid upsAlarmDescr, you must define the directory of the mibs files with -d Option (./mibs by default)
+battery_temp :The ambient temperature at or near the UPS Battery casing.
+             warninig and critical values requiered
+output_load :The percentage of the UPS power capacity presently being used on this output line,
+             i.e., the greater of the percent load of true power capacity and the percent load of VA.
+             warning and critical requiered.
+input_voltage :The magnitude of the present input voltage in the input lines.
+             normal value, interval warning and interval critical requiered
+             Example: normal value is 400V, warning in 395-405 V interval and critical 390-410 V interval
+             use: ./check_ups_snmp.sh -H 10.40.80.1 -p input_voltage -w 395:405 -c 390:400
+             in the example, normal value is 400V, warning in 395-405 V interval and critical 390-410 V interval
+num_input_lines :The number of input lines utilized in this device. This variable indicates the
+             number of rows in the input table, percent warning and critical no requiered.
+num_output_lines :The number of output lines utilized in this device. This variable indicates the
+             number of rows in the output table, warning and critical no requiered.
+battery_status :The indication of the capacity remaining in the UPS system's batteries.
+             A value of batteryNormal indicates that the remaining run-time is greater than upsConfigLowBattTime.
+             A value of batteryLow indicates that the remaining battery run-time is less than or
+             equal to upsConfigLowBattTime.  A value of batteryDepleted indicates that the UPS will be unable
+             to sustain the present load when and if the utility power is lost (including the possibility that the
+             utility power is currently absent and the UPS is unable to sustain the output).warning and critical no requiered. 
+             No perfdata show.
+battery_charge_remain: An estimate of the battery charge remaining expressed as a percent of full charge and minutes.
+             Warning and critical required and refered to the percent of charge
+
