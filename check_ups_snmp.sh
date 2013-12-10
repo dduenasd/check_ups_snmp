@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # plugin creado por Daniel Dueñas
-# Plugin para chequeo a traves de snmp de la tarjeta cs121 para ups
+# Plugin para chequeo a traves de snmp de la tarjeta cs121 y otras tarjetas para ups
 
 # plugin developed by Daniel Dueñas
-# This plugin can check a sai with cs121 adapter by snmp.
+# This plugin can check a sai with cs121 and other adapters by snmp.
 
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
