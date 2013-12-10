@@ -1,0 +1,32 @@
+Information Instalation plugin check_ups_snmp
+
+requirements
+- Net-SNMP
+
+This plugin is a linux script, to install it you have to copy it into the path of nagios plugins
+(usually in / usr / local / nagios / libexec ) and define command in nagios command.cfg file.
+
+Definition at command.cfg nagios :
+
+define command {
+        command_name check_ups_snmp
+        command_line $ USER1 $ / $ HOSTADDRESS check_ups_snmp.sh -H $ ARG1 $ -p -C $ ARG2 $ - w $ ARG3 $ - c $ ARG4 $
+        register 1
+}
+
+Once done , we must define a service for each parameter to be monitored in the service configuration file :
+
+define service {
+        host_name UPS_1
+        service_description ups_alarm
+        use ups_template
+        check_command check_ups_snmp ! snmp ! ups_alarm 0, 0, ! -d / usr / local / nagios / libexec / mibs
+        register 1
+}
+
+For correct use of ups_alarm option, including mibs in the /mibs directory are needed , they are needed to
+correctly interpret of the alarms that can give for snmp ups , in this case , as seen in the example of defining
+service , copy mibs files on path '/usr/local/nagios/libexec/mibs' but could be anywhere else .
+
+Pnp4nagios graphics templates are included, for install it, you must copy the file check_ups_snmp.php in '/share/templates'
+in pnp4nagios home directory.
