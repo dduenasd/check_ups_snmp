@@ -3,10 +3,10 @@ Information Instalation plugin check_ups_snmp
 requirements
 - Net-SNMP
 
-This plugin is a linux script, to install it you have to copy it into the path of nagios plugins
-(usually in / usr / local / nagios / libexec ) and define command in nagios command.cfg file.
+This plugin is a linux script, to install, copy it into the path of nagios plugins
+(usually in / usr / local / nagios / libexec ) and define a command in nagios command.cfg file.
 
-Definition at command.cfg nagios :
+Definition example in command.cfg nagios :
 
 define command {
         command_name check_ups_snmp

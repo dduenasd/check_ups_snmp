@@ -40,7 +40,7 @@ print_help(){
     print_version $PROGNAME $VERSION
     echo ""
     echo "Description:"
-    echo "$PROGNAME is a Nagios plugin to check by snmp a sai status with CS121 adapter."
+    echo "$PROGNAME is a Nagios plugin to check by snmp a sai or ups status with CS121 and other snmp card adapters."
 	echo "With performance data"
     echo ""
     echo "Use:"

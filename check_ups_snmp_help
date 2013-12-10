@@ -1,7 +1,7 @@
 Version 0.1, 2013, Daniel Dueñas Domingo (mail:dduenasd@gmail.com)
 
 Description:
-check_ups_snmp.sh is a Nagios plugin to check by snmp a sai status with CS121 adapter.
+$PROGNAME is a Nagios plugin to check by snmp a sai or ups status with CS121 and other snmp card adapters.
 With performance data
 
 Use:
