@@ -172,11 +172,11 @@ alarm(){
 temperature(){	
 	val=`getsnmp $1`
     f_error $?
-	output="battery temperature = "$val"ºC"
+	output="battery temperature = "$val"°C"
 	perfdata="'temperature'=$val;$2;$3"
 	if test $val -gt $3
 		then state=$ST_CR
-	elif test $val -gt $2
+	elif test $val -ge $2
 		then state=$ST_WR
 	elif test $val -lt $2 
 		then state=$ST_OK
