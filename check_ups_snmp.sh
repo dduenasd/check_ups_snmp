@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# plugin creado por Daniel Dueï¿½as
+# plugin creado por Daniel Dueñas
 # Plugin para chequeo a traves de snmp de la tarjeta cs121 y otras tarjetas para ups
 
-# plugin developed by Daniel Dueï¿½as
+# plugin developed by Daniel Dueñas
 # This plugin can check a sai with cs121 and other adapters by snmp.
 
 #   This program is free software; you can redistribute it and/or modify
@@ -21,12 +21,14 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 ######       CHANGE LOG        #########
+# V1.0:Include new parameter to select de version of snmp (1 or 2c)
 # V0.2:Fix the UNKNOWN state when warning value configured was the same as the current temperature on the UPS 
 #      thanks to puckel
 
+
 PROGNAME=`basename $0`
-VERSION="Version 0.2,"
-AUTHOR="2013, Daniel Dueï¿½as Domingo (mail:dduenasd@gmail.com)"
+VERSION="Version 1.0,"
+AUTHOR="2013, Daniel Dueñas Domingo (mail:dduenasd@gmail.com)"
 
 print_version() {
     echo "$VERSION $AUTHOR"
@@ -58,6 +60,8 @@ print_help(){
     echo "   Sets the hostname. Default is: localhost"
 	echo "-C|--community)"
 	echo "   Sets the snmp read community ('public' by default)"
+	echo "-v|--snmpversion 1|2c)"
+	echo "   specifies SNMP version to use (2c by default)"
 	echo "-p|--parameter)"
 	echo "   Sets the parameter you want monitorize (see available parameters below)"
 	echo "-h|--help)"
@@ -105,6 +109,7 @@ ST_WR=1
 ST_CR=2
 ST_UK=3
 
+
 host='localhost'
 community='public'
 parameter='none'
@@ -114,6 +119,7 @@ state=$ST_OK
 statestring=''
 val=''
 mibsPath="./mibs"
+snmpversion='2c'
 
 #ups oids snmp
 oid_upsOutputNumLines='1.3.6.1.2.1.33.1.4.3.0'
@@ -330,7 +336,7 @@ battery_charge_remain(){
 
 #obtain the value of the oid
 getsnmp(){
-	text=`snmpget -v 2c -c $community $host $1`
+	text=`snmpget -v $snmpversion -c $community $host $1`
 	if [ $? -ne 0 ] 
 	  then 
 		echo "plugin $PROGNAME failure, snmpget command error"
@@ -366,6 +372,10 @@ while test -n "$1"; do
 			;;
 		--community|-C)
 		    community=$2
+			shift
+			;;
+		--snmpversion|-v)
+			snmpversion=$2
 			shift
 			;;
 		--parameter|-p) 
