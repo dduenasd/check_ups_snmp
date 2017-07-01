@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# plugin creado por Daniel Dueñas
+# plugin creado por Daniel DueÃ±as
 # Plugin para chequeo a traves de snmp de la tarjeta cs121 y otras tarjetas para ups
 
-# plugin developed by Daniel Dueñas
+# plugin developed by Daniel DueÃ±as
 # This plugin can check a sai with cs121 and other adapters by snmp.
 
 #   This program is free software; you can redistribute it and/or modify
@@ -28,7 +28,7 @@
 
 PROGNAME=`basename $0`
 VERSION="Version 1.0,"
-AUTHOR="2013, Daniel Dueñas Domingo (mail:dduenasd@gmail.com)"
+AUTHOR="2013, Daniel DueÃ±as Domingo (mail:dduenasd@gmail.com)"
 
 print_version() {
     echo "$VERSION $AUTHOR"
@@ -182,7 +182,7 @@ alarm(){
 temperature(){	
 	val=`getsnmp $1`
     f_error $?
-	output="battery temperature = "$val"ï¿½C"
+	output="battery temperature = "$val"Â°C"
 	perfdata="'temperature'=$val;$2;$3"
 	if test $val -gt $3
 		then state=$ST_CR
