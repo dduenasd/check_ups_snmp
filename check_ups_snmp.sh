@@ -206,6 +206,11 @@ output_load(){
    do
       oid="$1.$counter"
 	  percentload[$counter]=`getsnmp $oid`
+	  # CS131 FIX. they use $oid.0 for storing the value
+	  if test ${percentload[$counter]} == 'Such'
+	  then
+	  	percentload[$counter]=`getsnmp $oid.0`
+	  fi
 	  counter=`expr $counter + 1`
    done
    output="Percent Load of $numlines lines:"
@@ -250,6 +255,11 @@ input_voltage(){
    do
       oid="$1.$counter"
 	  voltage[$counter]=`getsnmp $oid`
+  	  # CS131 FIX. They use $oid.0 for storing the value
+	  if ${voltage[$counter]} == 'Such'
+	  then
+	      voltage[$counter]=`getsnmp $oid.0`
+	  fi
 	  f_error $?
 	  counter=`expr $counter + 1`
    done
